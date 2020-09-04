@@ -4,12 +4,13 @@
  - Git
  - Docker
  
-###Quicker Start
+### Quicker Start
+
  Pull and run from docker hub - latest build from master branch
   
  `docker run -i -t -p 5000:5000 --rm realdubb/webhook-as-service:latest`
 
- 
+
 ### Quick Start
 1. Clone and `cd` into repo
 2. Build and run docker image `docker-compose up`
