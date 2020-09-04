@@ -1,0 +1,187 @@
+{
+	"info": {
+		"_postman_id": "7af660a0-8836-4a36-980d-5f7226b19626",
+		"name": "Flask Webhook As Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/current-state",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:{{port}}/current-state",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"current-state"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/webhook errors",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "db5cca6e-bdf0-4ea6-8b9f-6cb1b0e71512",
+						"exec": [
+							"pm.collectionVariables.set('webhook_status_url', postman.getResponseHeader('Location'));",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"url\": \"https://twiggy.free.beeceptor.com/should400\",\n\t\"requestType\": \"POST\", \n\t\"headers\": {\n\t\t\"Content-Type\": \"application/json\"\n\t},\n\t\"body\": \"{\\\"id\\\":1,\\\"cancel\\\":true}\"\n}"
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/webhook",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"webhook"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/webhook succeeds",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "92d3a0c4-06fa-4553-b04f-454008abb908",
+						"exec": [
+							"pm.collectionVariables.set('webhook_status_url', postman.getResponseHeader('Location'));\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"url\": \"https://webhook.site/283155b9-60cc-4621-a2cc-ac72e5ba4151\",\n\t\"requestType\": \"GET\", \n\t\"queryParams\": {\n\t\t\"q\": \"masquerade shirt\"\n\t},\n\t\"headers\": {\n\t\t\"Content-Type\": \"application/json\"\n\t},\n\t\"body\": \"{\\\"color\\\": \\\"green\\\", \\\"size\\\":\\\"large\\\"}\"\n}"
+				},
+				"url": {
+					"raw": "http://{{host}}:{{port}}/webhook",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"webhook"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/webhook/{id}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{webhook_status_url}}",
+					"host": [
+						"{{webhook_status_url}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "596b93c2-9b0b-4256-9613-5ee27ccf8c2e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "42765e3c-a4ad-4877-914e-e72bff6f3fcf",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "833fc7e6-9a11-4792-afe3-0cab408916a2",
+			"key": "host",
+			"value": "localhost"
+		},
+		{
+			"id": "3678d1be-d563-492f-947b-05f6f590f34a",
+			"key": "port",
+			"value": "5000"
+		},
+		{
+			"id": "5bf050d1-1268-4cfb-a024-13c570f965df",
+			"key": "webhook_status_url",
+			"value": "http://localhost:5000/webhook/1"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

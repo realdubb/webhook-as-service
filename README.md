@@ -1,12 +1,14 @@
 # Webhook as a Service
 
-Found on docker - latest build from master branch
- 
- `docker pull realdubb/webhook-as-service:latest`
-
 ### Requirements
  - Git
  - Docker
+ 
+###Quicker Start
+ Pull and run from docker hub - latest build from master branch
+  
+ `docker run -i -t -p 5000:5000 --rm realdubb/webhook-as-service:latest`
+
  
 ### Quick Start
 1. Clone and `cd` into repo
@@ -18,6 +20,9 @@ Found on docker - latest build from master branch
  - `app.py` - http routing and main entry point
  - `webhook_processor.py` - app logic for persisting and processing webhooks
  - `webhook_request.py` - class to represent webhook
+ 
+ - `Flask Webhook As Service.postam_collection.json` - Various endpoints and requests used to test the API. Ensure you've the latest version of postman and import collection.
+    - Variables are pre-populated as part of the collection with default host and ports which can be changed
 
 ### API Docs
 
